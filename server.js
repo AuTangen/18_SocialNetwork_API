@@ -1,7 +1,7 @@
 const express = require('express');
 const PORT = 3000;
 const db = require('./config/connection');
-const api_routes = require('./controllers/api_routes');
+const api_routes = require('./controllers');
 
 const app = express();
 

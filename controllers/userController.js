@@ -5,6 +5,7 @@ const { User, Thought } = require('../models');
 router.get('/', async (req, res) => {
     User.find()
     .select('-__v')
+    
     .then((users) => res.json(users))
     .catch((err) => res.status(500).json(err));
 
@@ -12,8 +13,9 @@ router.get('/', async (req, res) => {
 
 // get one user by id
 router.get('/:userId', async (req, res) => {
-    User.findOne({ _id: req.params.userId })
+    User.findOne({ _id: req.params.userId }).populate("friends").populate("thoughts")
     .select('-__v')
+    
     .then((user) =>
       !user
         ? res.status(404).json({ message: 'No user with that ID' })
@@ -69,10 +71,10 @@ User.findOneAndDelete({ _id: req.params.userId })
 // post /api/users/:userId/friends/:friendId
 router.put('/:userId/friends/:friendId', async (req, res) => {
 User.findOneAndUpdate(
-    { _id: req.body.userId },
+    { _id: req.params.userId },
     { $addToSet: { friends: req.params.friendId } },
     { new: true }
-  )
+  ).populate("friends")
   .then((user) =>
         !user
           ? res.status(404).json({

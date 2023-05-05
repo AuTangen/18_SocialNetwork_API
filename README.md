@@ -3,6 +3,8 @@
 ## Description
 A mock-up of a social-network api using MongoDB. Users can enter a username, email and create posts and react to others' posts
 
+[Link to walkthrough](https://drive.google.com/file/d/12J7X4eYxF-q1pqQHTIJRt0YLvxNUAqjN/view)
+
 ## Installation
 Run npm i to install dependencies, then use 'npm start' to start the database/server
 
